@@ -29,7 +29,7 @@
     Complex subtract(const Complex secondComplex) const;
     Complex divide(const Complex secondComplex) const;
     Complex multiply(const Complex secondComplex) const;
-    Complex abs(const Complex secondComples) const;
+    double abs(const Complex secondComplex) const;
     string toString() const;
     double getRealPart() const;
     double getImaginaryPart() const;
