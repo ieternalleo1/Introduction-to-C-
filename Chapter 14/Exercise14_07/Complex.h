@@ -18,18 +18,72 @@
  using namespace std;
  class Complex
  {
+     /**Member Functions */
  public:
+    /**Creates a  Complex object for number 0*/
     Complex();
-    Complex(int real);
+    Complex(int real); //suitable for type conversion
     Complex(int real, int imaginary);
-    Complex operator+(const Complex secondComplex) const;
-    Complex operator-(const Complex secondComplex) const;
-    Complex operator/(const Complex secondComplex) const;
-    Complex operator*(const Complex secondComplex) const;
-    Complex& operator+=(const Complex& seconsComplex);
+
+    Complex add(const Complex secondComplex) const;
+    Complex subtract(const Complex secondComplex) const;
+    Complex divide(const Complex secondComplex) const;
+    Complex multiply(const Complex secondComplex) const;
+    Complex abs(const Complex secondComples) const;
+    string toString() const;
+    int getRealPart() const;
+    int getImaginaryPart() const;
 
 
+    /**Define function operators for augmented operators*/
+    Complex& operator+=(const Complex& secondComplex);
+    Complex& operator-=(const Complex& secondComplex);
+    Complex& operator/=(const Complex& secondComplex);
+    Complex& operator*=(const Complex& secondComplex);
 
+    /**Define function operator for []*/
+    int& operator[](int index);
+    
+    /**Define function operators for postfix ++ and -- */
+    Complex& operator++(int dummy); //postfix
+    Complex& operator--(int dummy); //postfix --
+   
+    /**Define function operators for prefix ++ and --*/
+    Complex& operator++(); //prefix    
+    Complex& operator--(); //prefix --
+    
+    /** Define Function operators for unary + and - */
+    Complex operator-();
+    Complex operator+();
+    
+    /** Define the << and >> operators */
+    friend ostream& operator<<(ostream& out, const Complex& complex);
+    friend istream& operator>>(istream& in, const Complex& complex);
+    
 
+    /**Data Fields*/
+ private:
+    int real;
+    int imaginary;
  };
+
+
+ /**Non Member Functions */
+ 
+ //Define nonmember function operators for relational operators
+ bool operator<(const Complex& c1, const Complex& c2);
+ bool operator<=(const Complex& c1, const Complex& c2);
+ bool operator==(const Complex& c1, const Complex& c2);
+ bool operator!=(const Complex& c1, const Complex& c2);
+ bool operator>(const Complex& c1, const Complex& c2);
+ bool operator>=(const Complex& c1, const Complex& c2);
+
+ //Define nonmember function operators for arithmetic operators
+ Complex operator+(const Complex& c1, const Complex& c2);
+ Complex operator-(const Complex& c1, const Complex& c2);
+ Complex operator*(const Complex& c1, const Complex& c2);
+ Complex operator/(const Complex& c1, const Complex& c2);
+ 
+ 
+ 
  #endif
