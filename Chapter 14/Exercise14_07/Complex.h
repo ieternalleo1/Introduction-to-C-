@@ -22,8 +22,8 @@
  public:
     /**Creates a  Complex object for number 0*/
     Complex();
-    Complex(int real); //suitable for type conversion
-    Complex(int real, int imaginary);
+    Complex(double real); //suitable for type conversion
+    Complex(double real, double imaginary);
 
     Complex add(const Complex secondComplex) const;
     Complex subtract(const Complex secondComplex) const;
@@ -31,8 +31,8 @@
     Complex multiply(const Complex secondComplex) const;
     Complex abs(const Complex secondComples) const;
     string toString() const;
-    int getRealPart() const;
-    int getImaginaryPart() const;
+    double getRealPart() const;
+    double getImaginaryPart() const;
 
 
     /**Define function operators for augmented operators*/
@@ -42,7 +42,7 @@
     Complex& operator*=(const Complex& secondComplex);
 
     /**Define function operator for []*/
-    int& operator[](int index);
+    double& operator[](int index);
     
     /**Define function operators for postfix ++ and -- */
     Complex& operator++(int dummy); //postfix
@@ -63,8 +63,8 @@
 
     /**Data Fields*/
  private:
-    int real;
-    int imaginary;
+    double real = 0;
+    double imaginary = 0;
  };
 
 
