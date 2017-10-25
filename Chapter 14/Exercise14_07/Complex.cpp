@@ -44,10 +44,10 @@ Complex Complex::multiply(const Complex secondComplex) const
 Complex Complex::divide(const Complex secondComplex) const
 {
     Complex quotient;
-    double c = secondComplex.real;
-    double d = secondComplex.imaginary;
-    quotient.real = (real * c + imaginary*d)/(pow(c,2) + pow(d,2));
-    quotient.imaginary = (imaginary * c - real * d)/(pow(c,2) + pow(d,2));
+    double c = secondComplex.getRealPart();
+    double d = secondComplex.getImaginaryPart();
+    quotient::real = (real * c + imaginary*d)/(pow(c,2) + pow(d,2));
+    quotient::imaginary = (imaginary * c - real * d)/(pow(c,2) + pow(d,2));
 
     return quotient;
 }
@@ -74,6 +74,23 @@ double Complex::getImaginaryPart() const
 {
     return imaginary;
 }
+
+int Complex::compareTo(const Complex secondComplex) const
+{
+    double c1_abs = c1.abs();
+    double c2_abs = c2.abs();
+    if(c1_abs == c2_abs)
+    {
+        return 0;
+    }
+    else if(c1_abs > c2_abs)
+    {
+        return 1;
+    }
+    else
+    return -1;
+}
+
 
 /** Implement function operators for augment operators */
 Complex& Complex::operator+=(const Complex& secondComplex)
@@ -111,34 +128,96 @@ double& Complex::operator[](int index)
 }
 
 /**Define function operators for postfix ++ and -- */
-Complex& Complex::operator++(int dummy); //postfix
-Complex& Complex::operator--(int dummy); //postfix --
-
+Complex& Complex::operator++(int dummy) //postfix
+{
+    Complex c(1);
+    Complex temp = *this;
+     *this = add(c);
+    return temp;
+}
+Complex& Complex::operator--(int dummy) //postfix --
+{
+    Complex c(1);
+    Complex temp = *this;
+    *this  = subtract(c);
+    return temp;
+}
 /**Define function operators for prefix ++ and --*/
-Complex& Complex::operator++(); //prefix    
-Complex& Complex::operator--(); //prefix --
+Complex& Complex::operator++() //prefix
+{
+    Complex c(1);
+    *this = add(c);
+    return *this;
+}  
 
-/** Define Function operators for unary + and - */
-Complex Complex::operator-();
-Complex Complex::operator+();
+Complex& Complex::operator--() //prefix --
+{
+    Complex c(1);
+    *this = subtract(c);
+    return *this;
+}
+
+
 
 /** Define the << and >> operators */
-friend ostream& Complex::operator<<(ostream& out, const Complex& complex);
-friend istream& Complex::operator>>(istream& in, const Complex& complex);
+friend ostream& Complex::operator<<(ostream& out, const Complex& complex)
+{
+    out << complex.toString();
+    return out;
+}
+friend istream& Complex::operator>>(istream& in, const Complex& complex)
+{
+    cout << "Enter real number: "
+    in >> complex.getRealPart();
+    cout << "Enter Imaginary Numbers: "
+    in >> complex.getImaginaryPart();
+
+    return in;
+}
 
 
 /**Non Member Functions */
 
 //Define nonmember function operators for relational operators
-bool operator<(const Complex& c1, const Complex& c2);
-bool operator<=(const Complex& c1, const Complex& c2);
+bool operator<(const Complex& c1, const Complex& c2)
+{
+   return c1.compareTo(c2) != -1 ? false:true;
+}
+bool operator<=(const Complex& c1, const Complex& c2)
+{
+    return c1.compareTo(c2) == 1 ? false:true;
+}
 bool operator==(const Complex& c1, const Complex& c2);
+{
+    return c1.compareTo(c2) != 0 ? false:true;
+}
 bool operator!=(const Complex& c1, const Complex& c2);
-bool operator>(const Complex& c1, const Complex& c2);
-bool operator>=(const Complex& c1, const Complex& c2);
+{
+    return c1.compareTo(c2) == 0 ? false:true;
+}
+bool operator>(const Complex& c1, const Complex& c2)
+{
+    return c1.compareTo(c2) < 1 ? false: true;
+}
+bool operator>=(const Complex& c1, const Complex& c2)
+{
+        return c1.compareTo(c2) < 0 ? false:true;
+}
 
 //Define nonmember function operators for arithmetic operators
-Complex operator+(const Complex& c1, const Complex& c2);
-Complex operator-(const Complex& c1, const Complex& c2);
-Complex operator*(const Complex& c1, const Complex& c2);
-Complex operator/(const Complex& c1, const Complex& c2);
+Complex operator+(const Complex& c1, const Complex& c2)
+{
+    return c1.add(c2);
+}
+Complex operator-(const Complex& c1, const Complex& c2)
+{
+    return c1.subtract(c2);
+}
+Complex operator*(const Complex& c1, const Complex& c2)
+{
+    return c1.multiply(c2);
+}
+Complex operator/(const Complex& c1, const Complex& c2)
+{
+    return c1.divide(c2);
+}

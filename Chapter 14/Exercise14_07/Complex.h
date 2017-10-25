@@ -33,6 +33,7 @@
     string toString() const;
     double getRealPart() const;
     double getImaginaryPart() const;
+    bool compareTo(const Complex secondComplex) const;
 
 
     /**Define function operators for augmented operators*/
