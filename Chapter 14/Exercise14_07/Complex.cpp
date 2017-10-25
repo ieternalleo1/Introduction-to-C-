@@ -1,6 +1,7 @@
 /** Implementation of Complex Class*/
 #include "Complex.h"
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
