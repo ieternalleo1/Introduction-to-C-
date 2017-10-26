@@ -46,8 +46,8 @@ Complex Complex::divide(const Complex secondComplex) const
     Complex quotient;
     double c = secondComplex.getRealPart();
     double d = secondComplex.getImaginaryPart();
-    quotient::real = (real * c + imaginary*d)/(pow(c,2) + pow(d,2));
-    quotient::imaginary = (imaginary * c - real * d)/(pow(c,2) + pow(d,2));
+    quotient.real = (real * c + imaginary*d)/(pow(c,2) + pow(d,2));
+    quotient.imaginary = (imaginary * c - real * d)/(pow(c,2) + pow(d,2));
 
     return quotient;
 }
@@ -160,17 +160,19 @@ Complex& Complex::operator--() //prefix --
 
 
 /** Define the << and >> operators */
-friend ostream& Complex::operator<<(ostream& out, const Complex& complex)
+ostream& operator<<(ostream& out, const Complex& complex)
 {
     out << complex.toString();
     return out;
 }
-friend istream& Complex::operator>>(istream& in, const Complex& complex)
+
+
+istream& operator>>(istream& in,Complex& complex)
 {
-    cout << "Enter real number: "
-    in >> complex.getRealPart();
-    cout << "Enter Imaginary Numbers: "
-    in >> complex.getImaginaryPart();
+    cout << "Enter real number: ";
+    in >> complex.real;
+    cout << "Enter Imaginary Numbers: ";
+    in >> complex.imaginary;
 
     return in;
 }
@@ -181,27 +183,27 @@ friend istream& Complex::operator>>(istream& in, const Complex& complex)
 //Define nonmember function operators for relational operators
 bool operator<(const Complex& c1, const Complex& c2)
 {
-   return c1.compareTo(c2) != -1 ? false:true;
+    return c1.compareTo(c2) < 0;
 }
 bool operator<=(const Complex& c1, const Complex& c2)
 {
-    return c1.compareTo(c2) == 1 ? false:true;
+    return c1.compareTo(c2) < 1;
 }
 bool operator==(const Complex& c1, const Complex& c2)
 {
-    return c1.compareTo(c2) != 0 ? false:true;
+    return c1.compareTo(c2) == 0;
 }
 bool operator!=(const Complex& c1, const Complex& c2)
 {
-    return c1.compareTo(c2) == 0 ? false:true;
+    return c1.compareTo(c2) != 0;
 }
 bool operator>(const Complex& c1, const Complex& c2)
 {
-    return c1.compareTo(c2) < 1 ? false: true;
+    return c1.compareTo(c2) > 0;
 }
 bool operator>=(const Complex& c1, const Complex& c2)
 {
-        return c1.compareTo(c2) < 0 ? false:true;
+    return c1.compareTo(c2) > -1;
 }
 
 //Define nonmember function operators for arithmetic operators
