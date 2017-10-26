@@ -77,8 +77,8 @@ double Complex::getImaginaryPart() const
 
 int Complex::compareTo(const Complex secondComplex) const
 {
-    double c1_abs = c1.abs();
-    double c2_abs = c2.abs();
+    double c1_abs = this->abs();
+    double c2_abs = secondComplex.abs();
     if(c1_abs == c2_abs)
     {
         return 0;
@@ -187,11 +187,11 @@ bool operator<=(const Complex& c1, const Complex& c2)
 {
     return c1.compareTo(c2) == 1 ? false:true;
 }
-bool operator==(const Complex& c1, const Complex& c2);
+bool operator==(const Complex& c1, const Complex& c2)
 {
     return c1.compareTo(c2) != 0 ? false:true;
 }
-bool operator!=(const Complex& c1, const Complex& c2);
+bool operator!=(const Complex& c1, const Complex& c2)
 {
     return c1.compareTo(c2) == 0 ? false:true;
 }
